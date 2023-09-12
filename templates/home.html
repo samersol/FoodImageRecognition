@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename= 'css/bootstrap.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename= 'css/responsive.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css.map') }}">
+
+  {% for js_file in js_files %}
+    <script src="{{ js_file }}"></script>
+  {% endfor %}
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>Food30</title>
+  <!-- slider stylesheet -->
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Poppins:400,700|Raleway:400,700&display=swap"
+    rel="stylesheet" />
+
+  <!-- Custom styles for this template -->
+  <link href="css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="css/responsive.css" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="hero_area">
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container">
+          <a class="navbar-brand" href="home">
+            <img src="static/images/Asset 1.png" alt="" />
+
+            <span>
+              Food30
+            </span>
+          </a>
+
+          <div class="navbar-collapse" id="">
+            <div class="custom_menu-btn">
+              <button onclick="openNav()">
+                <span class="s-1"> </span>
+                <span class="s-2"> </span>
+                <span class="s-3"> </span>
+              </button>
+            </div>
+            <div id="myNav" class="overlay">
+              <div class="overlay-content">
+                <a href="home">HOME</a>
+                <a href="about">ABOUT</a>
+                <a href="food">Food</a>
+                <a href="contact">Contact Us</a>
+                <a href="login"> Log in</a>
+                <a href="register"> New Member</a>
+              </div>
+            </div>
+          </div>
+
+        </nav>
+      </div>
+
+    </header>
+    <!-- end header section -->
+    <!-- slider section -->
+    <section class=" slider_section position-relative">
+      <div class="side_heading">
+        <h5>
+          G
+          o
+          o
+          d
+          F
+          o
+          o
+          d
+        </h5>
+      </div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-3 col-md-4 offset-md-1">
+            <div id="carouselExampleIndicators" class="carousel slide " data-ride="carousel">
+
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <div class="img-box b-1">
+                    <img src="static/images/FalafelPNG.png" alt="" />
+                  </div>
+                </div>
+
+
+              </div>
+
+            </div>
+          </div>
+          <div class=" col-md-5 offset-md-1">
+            <div class="detail-box">
+              <h1>
+                Food Image Recognition <br>
+                Model For <br>
+                Calories Estimation
+              </h1>
+              <p>
+                We Bring you the easiest way for calories measurement, All you need
+                is to pull up your smartphone and capture the Food, And let us do the rest
+              </p>
+
+              <div class="btn-box">
+
+                <form action="/upload/{{userGoal}}" method="POST" enctype="multipart/form-data">
+                <label for="image" class="btn-2">
+                  Capture Food
+                </label>
+                <input type="file" id="image" name="image" ><br><br>
+                <button type="submit" class="btn-1">Predict</button>
+	            </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- end slider section -->
+  </div>
+
+  <!-- about section -->
+  <section class="about_section">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-5 offset-md-1">
+          <div class="detail-box">
+            <div class="heading_container">
+              <h2>
+                About <br>
+                Our <br>
+                Work
+              </h2>
+              <hr>
+            </div>
+            <p>
+              We try to help you choose the right diches for your determined goal, with deep learning
+              algorithms, the only thing you have to do, is uploading your diches in our site,
+              and we will handle the rest.
+            </p>
+            <a href="">
+              Read More
+            </a>
+          </div>
+        </div>
+        <div class="col-md-6 px-0">
+          <div class="img-box">
+            <img src="static/images/about-img.jpg" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end about section -->
+
+  <!-- dish section -->
+
+  <!-- end dish section -->
+
+  <!-- hot section -->
+
+  <section class="hot_section layout_padding">
+    <div class="container">
+      <div class="heading_container">
+        <h2>
+          Our Food Suggestions
+        </h2>
+        <hr>
+      </div>
+      <p>
+        There are many variations of diches suite your goals
+      </p>
+    </div>
+    <div class="carousel_container">
+      <div class="container">
+        <div class="carousel-wrap ">
+          <div class="owl-carousel">
+            <div class="item">
+              <div class="box">
+                <div class="img-box">
+                  <img src="static/images/hot-1.png" />
+                </div>
+                <div class="detail-box">
+                  <h4>
+                    450 cal
+                  </h4>
+                  <p>
+                    it will be a good choice for gaining weight, high protein and carb.
+                  </p>
+                  <a href="">
+                    Try it
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="box">
+                <div class="img-box">
+                  <img src="static/images/hot-2.png" />
+                </div>
+                <div class="detail-box">
+                  <h4>
+                    253 cal
+                  </h4>
+                  <p>
+                    good choice for losing weight, low calorie but high in carb,
+                    maybe time to time will be ok
+                  </p>
+                  <a href="">
+                    Try it
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="box">
+                <div class="img-box">
+                  <img src="static/images/hot-3.png" />
+                </div>
+                <div class="detail-box">
+                  <h4>
+                    325 cal
+                  </h4>
+                  <p>
+                    good for maintaining weight, high in protein and small amount of fat.
+                  </p>
+                  <a href="">
+                    Try it
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end hot section -->
+
+  <!-- app section -->
+
+
+  <!-- end app section -->
+
+  <!-- client section -->
+
+  <section class="client_section layout_padding">
+    <div class="container">
+      <div class="heading_container">
+        <hr>
+        <h2>
+          what is says our clients
+        </h2>
+      </div>
+            <div class="box ">
+              <div class="client_id">
+                <div class="img-box">
+                  <img src="static/images/Samer.png" alt="" class="img-fluid">
+                </div>
+                <h4>
+                  Samer Sol
+                </h4>
+              </div>
+              <div class="detail-box">
+                <p>
+                  I'm so in love with the details, I want to thank everybody
+                  who put his Hands in this enormous Work.
+                </p>
+              </div>
+            </div>
+
+            <div class="box ">
+              <div class="client_id">
+                <div class="img-box">
+                  <img src="static/images/Zenab.png" alt="" class="img-fluid">
+                </div>
+                <h4>
+                  Zenab Hamdan
+                </h4>
+              </div>
+              <div class="detail-box">
+                <p>
+                  so useful, I can work on this site and it help me,
+                  tracking my goals.
+                </p>
+              </div>
+            </div>
+
+          </div>
+          <div class="carousel-item">
+            <div class="box ">
+              <div class="client_id">
+                <div class="img-box">
+                  <img src="static/images/Samer.png" alt="" class="img-fluid">
+                </div>
+                <h4>
+                  Samer Sol
+                </h4>
+              </div>
+              <div class="detail-box">
+                <p>
+                  I'm so in love with the details, I want to thank everybody
+                  who put his Hands in this enormous Work.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="box ">
+              <div class="client_id">
+                <div class="img-box">
+                  <img src="static/images/client.png" alt="" class="img-fluid">
+                </div>
+                <h4>
+                  Jacksmith sand
+                </h4>
+              </div>
+              <div class="detail-box">
+                <p>
+                  There are many variations of passages of Lorem Ipsum available, but the majority have suffered
+                  alteration in
+                  some form, by injected humour, or randomised words which .
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="box ">
+              <div class="client_id">
+                <div class="img-box">
+                  <img src="static/images/client.png" alt="" class="img-fluid">
+                </div>
+                <h4>
+                  Jacksmith sand
+                </h4>
+              </div>
+              <div class="detail-box">
+                <p>
+                  There are many variations of passages of Lorem Ipsum available, but the majority have suffered
+                  alteration in
+                  some form, by injected humour, or randomised words which .
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <!-- end client section -->
+
+  <!-- contact section -->
+
+  <section class="contact_section layout_padding-bottom ">
+    <div class="container">
+      <h2>
+        Get In touch
+      </h2>
+      <div class="row">
+        <div class="col-md-7">
+          <div class="form_container">
+            <form action="">
+              <input type="text" placeholder="Name">
+              <input type="text" placeholder="Phone number">
+              <input type="email" placeholder="Email">
+              <input type="text" placeholder="Message" class="message_input">
+              <button>
+                Send
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="contact_box">
+            <a href="">
+              <div class="img-box">
+                <img src="static/images/location.png" alt="">
+              </div>
+              <h6>
+                Homs Al Baath Uni
+              </h6>
+            </a>
+            <a href="">
+              <div class="img-box">
+                <img src="static/images/call.png" alt="">
+              </div>
+              <h6>
+                (+963) 935652424
+              </h6>
+            </a>
+            <a href="">
+              <div class="img-box">
+                <img src="static/images/envelope.png" alt="">
+              </div>
+              <h6>
+                solimansamer775@gmail.com
+              </h6>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end contact section -->
+
+  <!-- subscribe section -->
+
+  <section class="subscribe_section">
+    <div class="container">
+      <form action="">
+        <div class="row">
+          <div class="col-lg-3 col-md-4">
+            <label for="subEmail">
+              Our Newsletter
+            </label>
+          </div>
+          <div class="col-lg-9 col-md-8">
+            <div class="box">
+              <input type="email" placeholder="Enter your email" id="subEmail">
+              <button>
+                Subscribe
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- end subscribe section -->
+
+  <!-- footer section -->
+  <section class="container-fluid footer_section">
+    <div class="social_container">
+      <h4>
+        Follow on
+      </h4>
+      <div class="social-box">
+        <a href="">
+          <img src="static/images/fb.png" alt="">
+        </a>
+        <a href="">
+          <img src="static/images/twitter.png" alt="">
+        </a>
+        <a href="">
+          <img src="static/images/linkedin.png" alt="">
+        </a>
+        <a href="">
+          <img src="static/images/youtube.png" alt="">
+        </a>
+      </div>
+    </div>
+    <p>
+      &copy; 2023 All Rights Reserved. Design by
+      <a href="facebook.com/solsamer">Samer Sulaiman & Zenab Hamdan</a>
+    </p>
+  </section>
+  <!-- footer section -->
+
+  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+  </script>
+
+  <script>
+    function openNav() {
+      document.getElementById("myNav").classList.toggle("menu_width");
+      document
+        .querySelector(".custom_menu-btn")
+        .classList.toggle("menu_btn-style");
+    }
+  </script>
+
+  <!-- owl carousel script -->
+  <script type="text/javascript">
+    $(".owl-carousel").owlCarousel({
+      loop: true,
+      margin: 35,
+      navText: [],
+      autoplay: true,
+      autoplayHoverPause: true,
+      responsive: {
+        0: {
+          items: 1
+        },
+        600: {
+          items: 2
+        },
+        1000: {
+          items: 3
+        }
+      }
+    });
+  </script>
+  <!-- end owl carousel script -->
+
+</body>
+
+</html>

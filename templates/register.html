@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="{{ url_for('static', filename= 'css/bootstrap1.css') }}">
+        <link rel="stylesheet" href="style2.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style2.css') }}">
+        <title>Create account Example</title>
+    </head>
+    <body>
+        <span class="background"></span>
+        <span class="centering">
+            {% if success %}
+
+                  <div
+      class="alert fade"
+      id="alert-success"
+      role="alert"
+      data-mdb-color="success"
+      data-mdb-position="top-right"
+      data-mdb-stacking="true"
+      data-mdb-width="535px"
+      data-mdb-width="535px"
+      data-mdb-append-to-body="true"
+      data-mdb-hidden="true"
+      data-mdb-autohide="true"
+      data-mdb-delay="2000"
+    >
+      you Create Account successfully!
+    </div>
+
+
+            {% endif %}
+            <form class="my-form" action="/register" method="POST">
+                <h1>Signup</h1>
+                <div class="text-field">
+                    <label for="email">Email:</label>
+                    <input
+                        aria-label="Email"
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter Your Email"
+                        required
+                    >
+                </div>
+                <div class="text-field">
+                    <label for="name">Full Name:</label>
+                    <input
+                        id="name"
+                        type="name"
+                        aria-label="name"
+                        name="name"
+                        placeholder="Enter your Name"
+                        required
+                    >
+                </div>
+
+                <div class="text-field">
+                    <label for="password"> Password:</label>
+                    <input
+                        id="password"
+                        type="password"
+                        aria-label="Password"
+                        name="password"
+                        placeholder="Enter Your Password"
+                        title="Minimum 6 characters at least 1 Alphabet and 1 Number"
+                        pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$"
+                        required
+                    >
+                </div>
+                <div class="text-field">
+                    <label for="confirmpassword">Confirm Password:</label>
+                    <input
+                        id="confirmpassword"
+                        type="password"
+                        aria-label="Password"
+                        name="password"
+                        placeholder="Re-enter Your Password"
+                        title="Minimum 6 characters at least 1 Alphabet and 1 Number"
+                        pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$"
+                        required
+                    >
+                </div>
+                <div class="text-field">
+                    <label for="goal">Choose your Goal:</label>
+                  <select  name="goal" id="goal" >
+                    <option value="lose">Lose Weight</option>
+                    <option value="maintain">Maintain Weight</option>
+                    <option value="gain">Gain Weight</option>
+                  </select>
+                </div>
+                <div class="my-form__actions">
+                    <div class="my-form__row1">
+                         <a href="#" title="Forgot password?">Forgot password?</a>
+                    </div>
+                </div>
+                <input type="submit" class="my-form__button" value="Signup" />
+                 <div class="my-form__signup">
+                        <span>Already have an account? </span>
+                        <a href="login" title="login">Login</a>
+                 </div>
+            </form>
+        </span>
+        <script src="script.js"></script>
+    </body>
+</html>
