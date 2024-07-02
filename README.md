@@ -160,7 +160,7 @@ plt.ylabel("Actual")
 plt.title("Food Classification")
 plt.show()
 ```
-<img src=''>
+<img src='https://github.com/samersol/FoodImageRecognition/blob/master/confusion%20matrix.png?raw=true'>
 
 # SAVING MODEL
 ```python
