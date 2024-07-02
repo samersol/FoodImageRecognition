@@ -192,3 +192,5 @@ ImageDetector(path)
 
 <h4>1/1 ━━━━━━━━━━━━━━━━━━━━ 1s 1s/step <br>
 'Steak'</h4>
+
+<img src='https://github.com/samersol/FoodImageRecognition/blob/master/meatrub.jpg?raw=true'>
