@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename= 'css/bootstrap.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename= 'css/responsive.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css.map') }}">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Poppins:400,700|Raleway:400,700&display=swap"
+    rel="stylesheet" />
+    <title>sample</title>
+</head>
+<body>
+
+
+   <section class=" slider_section position-relative">
+      <div class="side_heading">
+        <h5>
+          G
+          o
+          o
+          d
+          A
+          D
+          v
+          i
+          c
+          e
+        </h5>
+      </div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-3 col-md-4 offset-md-1">
+            <div id="carouselExampleIndicators" class="carousel slide " data-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <div class="img-box b-1">
+                    <img src="static/images/chickenBurger.jpg" alt="" />
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class=" col-md-5 offset-md-1">
+            <div class="detail-box">
+              <h1>
+                Your Food is : <br>
+                <span style="background-color: #10e276; color: white;font-weight: italic;font-size: 65%">{{calories}} cal per 1 serving</span>  <br>
+                We offer you a friendly advice :
+              </h1>
+              <p>
+                We Bring you the easiest way for calories measurement, All you need
+                is to pull up your smartphone and capture the Food, And let us do the rest
+              </p>
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+</body>
+</html>

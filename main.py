@@ -1,31 +1,28 @@
 
 from flask import Flask, request, render_template, url_for, redirect,session
-from Flask_Uploads import UploadSet, configure_uploads, IMAGES
-
+from flask_uploads import UploadSet, configure_uploads, IMAGES
 import Functions as func
-
-
-import mysql.connector
-
-
-db = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="",
-    database="test"
-)
-success= False
-
-
+from flask_pymongo import PyMongo
+from bson.binary import Binary
+import io
+import base64
 
 app = Flask(__name__)
+
+app.config["MONGO_URI"] = "mongodb+srv://soliman775:samersamer123@food30.pr9yqh3.mongodb.net/userFood?retryWrites=true&w=majority&appName=food30"
+mongo = PyMongo(app)
+
+
+
+
+
 app.secret_key = 'nobodyknowssamerlr123'  # Set a secret key for the session
 
 
-photos = UploadSet('photos', IMAGES)
+# photos = UploadSet('photos', IMAGES)
 
-app.config['UPLOADED_PHOTOS_DEST'] = 'static/img'
-configure_uploads(app, photos)
+# app.config['UPLOADED_PHOTOS_DEST'] = 'static/img'
+# configure_uploads(app, photos)
 
 
 
@@ -39,11 +36,10 @@ configure_uploads(app, photos)
 """""""""
 
 def fetch_Goal(email):
-    cursor = db.cursor()
-    cursor.execute("SELECT goal FROM users WHERE email = %s", (email,))
-    userGoal = cursor.fetchone()
-    cursor.close()
-
+    users = mongo.db.userFood
+    user = users.find_one({"email": email})
+    userGoal = user['goal'] if user else None
+    session['userGoal'] = userGoal  # Store userGoal in session
     return userGoal
 
 
@@ -57,10 +53,13 @@ def register():
         email = request.form['email']
         password = request.form['password']
         goal = request.form['goal']
-        cursor = db.cursor()
-        cursor.execute(
-            "INSERT INTO users ( email, fullName, password, goal) VALUES ( %s, %s, %s, %s)", ( email, name, password, goal))
-        db.commit()
+        users = mongo.db.userFood
+        users.insert_one({
+            "email": email,
+            "fullName": name,
+            "password": password,
+            "goal": goal
+        })
         success = True
         return render_template('login.html', success=success)
     return render_template('register.html')
@@ -72,15 +71,11 @@ def register():
 def Authenticate():
     email = request.form['email']
     password = request.form['password']
-    cursor = db.cursor()
-    cursor.execute(
-        "SELECT * FROM users WHERE email = %s AND password = %s", (email, password))
-    user = cursor.fetchone()
-    session['email'] = email
-    session['password'] = password
-    cursor.close()
-
+    users = mongo.db.userFood
+    user = users.find_one({"email": email, "password": password})
     if user:
+        session['email'] = email
+        session['password'] = password
         return redirect('/home')
     else:
         return redirect('/login')
@@ -107,14 +102,18 @@ def login():
 @app.route('/upload/<userGoal>', methods=['GET', 'POST'])
 def upload(userGoal):
    img = request.files['image']
-   filename = photos.save(img)
+   img_read = io.BytesIO(img.read())
+   img_binary = Binary(img_read.read())
    FoodName= func.processing_image(img)
    calories= func.fetch_calories2(FoodName)
-   userGoal1=userGoal[2:-3]
-   print(userGoal1)
-   advice=func.provide_advice(userGoal1,int(calories))
+   advice=func.provide_advice(userGoal,int(calories))
+   users = mongo.db.userFood
+   users.insert_one({
+            "image": img_binary,
+        })
+   img_base64 = base64.b64encode(img_binary).decode()
 
-   return render_template('result.html', FoodName=FoodName, calories=calories, filename=filename,advice=advice,userGoal1=userGoal1)
+   return render_template('result.html', FoodName=FoodName, calories=calories,img_data=img_base64,advice=advice,userGoal=userGoal)
 
 
 
@@ -151,6 +150,11 @@ def home():
 
     return render_template('home.html')
 
+
+@app.route('/sample')
+def sample():
+
+   return render_template('sample.html')
 
 
 

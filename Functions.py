@@ -1,11 +1,12 @@
 
 from bs4 import BeautifulSoup
 import requests
+import json
 from PIL import Image
 import numpy as np
 from keras.models import load_model
 model = load_model('Food30.h5')
-
+import random
 
 
 labels = {0: 'Fish', 1: 'Hot dog', 2: 'Potato Fries', 3: 'Spaghetti', 4: 'Steak', 5: 'apple_pie', 6: 'baklava',
@@ -48,22 +49,46 @@ def provide_advice(goal, calories):
 
 def fetch_calories2(FoodName):
 
+
+
+    # Set up the API endpoint
+    url = "https://trackapi.nutritionix.com/v2/natural/nutrients"
+
+    # Set up the headers with your application ID and key
+    headers = {
+        "x-app-id": "e0a784df",
+        "x-app-key": "6d5789bb144c38fb972ab588c751d92d",
+        "Content-Type": "application/json"
+    }
+
+    # Set up the payload with the food name
+    payload = {
+        "query": FoodName,
+        "timezone": "US/Eastern"
+    }
+
+    # Send a POST request to the API
+    response = requests.post(url, headers=headers, data=json.dumps(payload))
+
+    # Parse the response
+    data = response.json()
+    # Extract the calories value
+    calories = data['foods'][0]['nf_calories']
+    return calories
     # Format the food name for the search query
-    search_query = FoodName.replace(" ", "+") + "+calories"
 
-    # Send a GET request to Google
-    response = requests.get("https://www.google.com/search?q=" + search_query)
+    # # Send a GET request to Google
+    # response = requests.get("https://www.google.com/search?q=" + search_query)
 
-    # Parse the HTML content of the response using BeautifulSoup
-    soup = BeautifulSoup(response.content, "html.parser")
+    # # Parse the HTML content of the response using BeautifulSoup
+    # soup = BeautifulSoup(response.content, "html.parser")
 
-    # Find the element containing the calories information
-    calories_element = soup.find("div", class_="BNeawe iBp4i AP7Wnd")
+    # # Find the element containing the calories information
+    # calories_element = soup.find("div", class_="Z0LcW an_fna")
 
-    if calories_element:
-        # Extract the calories value
-        calories = calories_element.text.split(" ")[0]
-        calories2= int(calories)*2
-        return calories2
-    else:
-        return "Calories not found"
+    # if calories_element:
+    #     # Extract the calories value
+    #     calories = calories_element.text.split(" ")[0]
+    #     return calories
+    # else:
+    #     return "Calories not found"

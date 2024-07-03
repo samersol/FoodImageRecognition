@@ -9,10 +9,6 @@
   <link rel="stylesheet" href="{{ url_for('static', filename= 'css/responsive.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css.map') }}">
 
-  {% for js_file in js_files %}
-    <script src="{{ js_file }}"></script>
-  {% endfor %}
-
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <!-- Mobile Metas -->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -40,6 +36,20 @@
 </head>
 
 <body>
+<!-- the actual interesting bit -->
+<div class="lightbox closed">
+  <div class="iframeContainer">
+      <div class="toolbarLB">
+          <p>Please, Register First, or you can use The given Username and Password Below :)</p>
+          <h4>Username: <b>food@food.com</b> <br> Password: <b>foodfood1</b></h4>
+      </div>
+      <!-- Add Register Button -->
+      <button onclick="window.location.href='register'" class="registerBtn">Register <span onclick="lightBoxClose()"></span></button>
+      <!-- Removed closeLB link -->
+  </div>
+</div>
+
+
   <div class="hero_area">
     <!-- header section strats -->
     <header class="header_section">
@@ -49,7 +59,6 @@
             <img src="static/images/Asset 1.png" alt="" />
 
             <span>
-              Food30
             </span>
           </a>
 
@@ -63,10 +72,10 @@
             </div>
             <div id="myNav" class="overlay">
               <div class="overlay-content">
-                <a href="home">HOME</a>
-                <a href="about">ABOUT</a>
-                <a href="food">Food</a>
-                <a href="contact">Contact Us</a>
+                <a href="#home">HOME</a>
+                <a href="#about">ABOUT</a>
+                <a href="#food">Food</a>
+                <a href="#contact">Contact Us</a>
                 <a href="login"> Log in</a>
                 <a href="register"> New Member</a>
               </div>
@@ -79,43 +88,20 @@
     </header>
     <!-- end header section -->
     <!-- slider section -->
-    <section class=" slider_section position-relative">
-      <div class="side_heading">
-        <h5>
-          G
-          o
-          o
-          d
-          F
-          o
-          o
-          d
-        </h5>
-      </div>
+    <section id="home" class=" slider_section position-relative">
+      
       <div class="container-fluid">
         <div class="row">
-          <div class="col-lg-3 col-md-4 offset-md-1">
-            <div id="carouselExampleIndicators" class="carousel slide " data-ride="carousel">
-
-              <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <div class="img-box b-1">
+         <div class="img-box b-1">
                     <img src="static/images/FalafelPNG.png" alt="" />
                   </div>
-                </div>
-
-
-              </div>
-
-            </div>
-          </div>
           <div class=" col-md-5 offset-md-1">
             <div class="detail-box">
               <h1>
                 Food Image Recognition <br>
-                Model For <br>
-                Calories Estimation
+                Model 
               </h1>
+              <h3>For Calories Estimation & Provide with little Advice</h3>
               <p>
                 We Bring you the easiest way for calories measurement, All you need
                 is to pull up your smartphone and capture the Food, And let us do the rest
@@ -127,7 +113,7 @@
                 <label for="image" class="btn-2">
                   Capture Food
                 </label>
-                <input type="file" id="image" name="image" ><br><br>
+                <input type="file" id="image" name="image" hidden><br><br>
                 <button type="submit" class="btn-1">Predict</button>
 	            </form>
               </div>
@@ -141,7 +127,7 @@
   </div>
 
   <!-- about section -->
-  <section class="about_section">
+  <section id="about" class="about_section">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-5 offset-md-1">
@@ -165,7 +151,7 @@
           </div>
         </div>
         <div class="col-md-6 px-0">
-          <div class="img-box">
+          <div class="img-box2">
             <img src="static/images/about-img.jpg" alt="">
           </div>
         </div>
@@ -181,7 +167,7 @@
 
   <!-- hot section -->
 
-  <section class="hot_section layout_padding">
+  <section id="food" class="hot_section layout_padding">
     <div class="container">
       <div class="heading_container">
         <h2>
@@ -375,7 +361,7 @@
 
   <!-- contact section -->
 
-  <section class="contact_section layout_padding-bottom ">
+  <section id="contact" class="contact_section layout_padding-bottom ">
     <div class="container">
       <h2>
         Get In touch
@@ -483,9 +469,7 @@
   <!-- footer section -->
 
   <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
-  <script type="text/javascript" src="js/bootstrap.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
-  </script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
   <script>
     function openNav() {
@@ -516,6 +500,55 @@
         }
       }
     });
+  </script>
+  <script>
+    function rC(nam) {
+  var tC = document.cookie.split('; ');
+  for (var i = tC.length - 1; i >= 0; i--) {
+    var x = tC[i].split('=');
+    if (nam == x[0]) return unescape(x[1]);
+  }
+  return '~';
+}
+
+function writeCookie(nam, val) {
+  document.cookie = nam + '=' + escape(val);
+}
+
+function lookupCookie(nam, pg) {
+  var val = rC(nam);
+  if (val.indexOf('~' + pg + '~') != -1) return false;
+  val += pg + '~';
+  writeCookie(nam, val);
+  return true;
+}
+
+function firstTime(cookieName) {
+  return lookupCookie('pWrD4jBo', cookieName);
+}
+
+function thisPage() {
+  var page = location.href.substring(location.href.lastIndexOf('\/') + 1);
+  pos = page.indexOf('.');
+  if (pos > -1) {
+    page = page.substr(0, pos);
+  }
+  return page;
+}
+
+function init() {
+  if (firstTime(thisPage())) {
+    // this code only runs for first visit
+    document.querySelector(".lightbox").classList.remove("closed");
+  }
+}
+
+init();
+
+lightBoxClose = function() {
+  document.querySelector(".lightbox").classList.add("closed");
+}
+
   </script>
   <!-- end owl carousel script -->
 
